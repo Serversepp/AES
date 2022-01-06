@@ -8,6 +8,7 @@ class AES:
 class AES_keygen:
     def __init__(self,initkey):
         self.momentaneTransformation = 0
+        self.RC = 0 # TODO MAY DELETE LATER (NOT NEEDED)
         self.keylist = []
         if (len(initkey)%128!=0): raise CustomError("Key len does not match 128/256/512 bit")
         self.mode = len(initkey)/128 # 1 for 128 2 for 256 etc
@@ -27,10 +28,19 @@ class AES_keygen:
             keysections = nextkeysections
 
     def __G(self,bitpair32):
-        def __RC():
-            pass
+        def __applyroundRC():
+            if (self.momentaneTransformation == 1):
+                rc = 1
+            if (self.momentaneTransformation ):
+                rc = 2**(self.momentaneTransformation-1)
+           #if ()
         eightbitlist = [bitpair32[i*8:i*8+8] for i in range(4)]
-        __RC()
+        afterG8bitlist = []
+        afterG8bitlist.append(__applyroundRC(eightbitlist[-1]))
+        for i in range(eightbitlist-1):
+            afterG8bitlist.append(eightbitlist[i])
+
+        return afterG8bitlist
 
         pass
 

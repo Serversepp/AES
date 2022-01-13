@@ -36,14 +36,16 @@ class AES_keygen:
            #if ()
         eightbitlist = [bitpair32[i*8:i*8+8] for i in range(4)]
         afterG8bitlist = []
-        afterG8bitlist.append(__applyroundRC(eightbitlist[-1]))
-        for i in range(eightbitlist-1):
+        afterG8bitlist.append(eightbitlist[-1])
+        for i in range(len(eightbitlist), 1, -1):
             afterG8bitlist.append(eightbitlist[i])
-
+        afterG8bitlist[0]=__applyroundRC(afterG8bitlist[0])
         return afterG8bitlist
 
-        pass
-
+    def __8bitxor(self,A,B):
+        for a,b in zip(A,B):
+            a = a^b
+        return A
     def __32bitxor(self,A,B):
         for a,b in zip(A,B):
             a = a^b
